@@ -1,0 +1,27 @@
+pipeline {
+    agent { docker { image 'python:latest'} } 
+    environment {
+        APP_ENV="prod"
+    }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Build'
+                echo "Current app env ${APP_ENV}"
+                sh "ls -la"
+                sh "curl ifconfig.me"
+            }
+        }
+         stage('Test') {
+            steps {
+                echo 'Test'
+            }
+        }
+        stage('Prod') {
+            steps {
+                echo 'Prod'
+                sh "python --version"
+            }
+        }
+    }
+}
